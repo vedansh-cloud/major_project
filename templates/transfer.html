@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Transfer Money - Jan Seva Bank{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="welcome-header">
+        <h2>Transfer Money</h2>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Back to Dashboard</a>
+    </div>
+
+    <div class="balance-card">
+        <h3>Available Balance</h3>
+        <div class="balance-amount">₹{{ balance }}</div>
+    </div>
+
+    <div class="form-container" style="max-width: 600px;">
+        <form method="POST" action="{{ url_for('transfer') }}">
+            <div class="form-group">
+                <label for="receiver_username">Receiver Username</label>
+                <input type="text" id="receiver_username" name="receiver_username" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">Amount (₹)</label>
+                <input type="number" id="amount" name="amount" class="form-control" step="0.01" min="0.01" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Transfer</button>
+        </form>
+    </div>
+
+    <div class="transaction-info">
+        <h3>Transfer Options</h3>
+        <div class="info-cards">
+            <div class="info-card">
+                <i class="fas fa-user-friends"></i>
+                <h4>Within Jan Seva Bank</h4>
+                <p>Instant transfers to other Jan Seva Bank accounts with no fees.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-university"></i>
+                <h4>IMPS Transfer</h4>
+                <p>Transfer to other banks using IMPS (Instant Mobile Payment Service).</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-rupee-sign"></i>
+                <h4>NEFT Transfer</h4>
+                <p>Transfer to other banks using NEFT (National Electronic Funds Transfer).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.transaction-info {
+    margin-top: 40px;
+}
+
+.transaction-info h3 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.info-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.info-card i {
+    font-size: 40px;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.info-card h4 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+</style>
+{% endblock %}

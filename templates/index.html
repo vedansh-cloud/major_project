@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to Jan Seva Bank</h1>
+        <p>Your trusted partner for secure and convenient banking services. Experience the future of banking with our cutting-edge digital solutions.</p>
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Open an Account</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Secure Banking</h3>
+            <p>Your money is safe with our advanced security measures and encryption technologies.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Mobile Banking</h3>
+            <p>Bank on the go with our user-friendly mobile app available for iOS and Android.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <h3>Easy Loans</h3>
+            <p>Get quick approval for personal, home, and business loans with competitive interest rates.</p>
+        </div>
+    </section>
+{% endblock %}

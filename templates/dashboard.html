@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Jan Seva Bank{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Dashboard</h3>
+        <ul class="sidebar-menu">
+            <li><a href="{{ url_for('dashboard') }}"><i class="fas fa-home"></i> Overview</a></li>
+            <li><a href="{{ url_for('deposit') }}"><i class="fas fa-money-bill-wave"></i> Deposit</a></li>
+            <li><a href="{{ url_for('withdraw') }}"><i class="fas fa-hand-holding-usd"></i> Withdraw</a></li>
+            <li><a href="{{ url_for('transfer') }}"><i class="fas fa-exchange-alt"></i> Transfer</a></li>
+            <li><a href="{{ url_for('history') }}"><i class="fas fa-history"></i> Transaction History</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="welcome-header">
+            <h2>Welcome, {{ username }}!</h2>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Refresh</a>
+        </div>
+
+        <div class="balance-card">
+            <h3>Available Balance</h3>
+            <div class="balance-amount">₹{{ balance }}</div>
+            <div class="account-number">Account No: XXXX-XXXX-XXXX-1234</div>
+        </div>
+
+        <div class="quick-actions">
+            <div class="action-card" onclick="location.href='/deposit'">
+                <i class="fas fa-money-bill-wave"></i>
+                <h4>Deposit</h4>
+                <p>Add money to your account</p>
+            </div>
+            <div class="action-card" onclick="location.href='/withdraw'">
+                <i class="fas fa-hand-holding-usd"></i>
+                <h4>Withdraw</h4>
+                <p>Take money from your account</p>
+            </div>
+            <div class="action-card" onclick="location.href='/transfer'">
+                <i class="fas fa-exchange-alt"></i>
+                <h4>Transfer</h4>
+                <p>Send money to others</p>
+            </div>
+            <div class="action-card" onclick="location.href='/history'">
+                <i class="fas fa-history"></i>
+                <h4>History</h4>
+                <p>View transaction history</p>
+            </div>
+        </div>
+
+        <div class="recent-transactions">
+            <h3>Recent Transactions</h3>
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12 Oct 2023</td>
+                        <td>Mobile Recharge</td>
+                        <td>Debit</td>
+                        <td style="color: var(--danger);">-₹499.00</td>
+                    </tr>
+                    <tr>
+                        <td>10 Oct 2023</td>
+                        <td>Salary Credit</td>
+                        <td>Credit</td>
+                        <td style="color: var(--success);">+₹45,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>05 Oct 2023</td>
+                        <td>Electricity Bill</td>
+                        <td>Debit</td>
+                        <td style="color: var(--danger);">-₹1,287.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

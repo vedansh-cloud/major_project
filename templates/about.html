@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Jan Seva Bank{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <h2 class="text-center">About Jan Seva Bank</h2>
+    
+    <div class="about-section">
+        <div class="about-content">
+            <h3>Our Mission</h3>
+            <p>At Jan Seva Bank, our mission is to provide accessible, secure, and innovative banking solutions to empower individuals and businesses across India. We believe in financial inclusion and strive to make banking services available to everyone.</p>
+            
+            <h3>Our History</h3>
+            <p>Established in 1985, Jan Seva Bank has been serving customers for over three decades. What started as a small community bank has now grown into a trusted financial institution with millions of customers across the country.</p>
+            
+            <h3>Our Values</h3>
+            <ul>
+                <li><strong>Integrity:</strong> We conduct our business with the highest ethical standards.</li>
+                <li><strong>Innovation:</strong> We continuously evolve to meet the changing needs of our customers.</li>
+                <li><strong>Inclusion:</strong> We believe banking should be accessible to all.</li>
+                <li><strong>Service:</strong> We put our customers at the center of everything we do.</li>
+            </ul>
+            
+            <h3>Our Services</h3>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h4>Savings Accounts</h4>
+                    <p>Secure accounts with competitive interest rates.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h4>Loans</h4>
+                    <p>Personal, home, and business loans with flexible terms.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Digital Banking</h4>
+                    <p>Bank anytime, anywhere with our mobile app.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Insurance</h4>
+                    <p>Protect what matters most with our insurance products.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.about-section {
+    padding: 20px;
+}
+
+.about-content h3 {
+    color: var(--primary);
+    margin: 25px 0 15px;
+    border-bottom: 2px solid var(--light);
+    padding-bottom: 8px;
+}
+
+.about-content ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.about-content li {
+    margin-bottom: 10px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.service-item {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+}
+
+.service-item i {
+    font-size: 40px;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.service-item h4 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+</style>
+{% endblock %}

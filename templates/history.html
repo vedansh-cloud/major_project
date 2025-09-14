@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}Transaction History - Jan Seva Bank{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="welcome-header">
+        <h2>Transaction History</h2>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Back to Dashboard</a>
+    </div>
+
+    <div class="filters">
+        <form method="GET" action="{{ url_for('history') }}">
+            <div class="filter-group">
+                <label for="type">Transaction Type:</label>
+                <select id="type" name="type" class="form-control">
+                    <option value="">All Transactions</option>
+                    <option value="deposit">Deposits</option>
+                    <option value="withdraw">Withdrawals</option>
+                    <option value="transfer">Transfers</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" class="form-control">
+            </div>
+            
+            <div class="filter-group">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" class="form-control">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+        </form>
+    </div>
+
+    <div class="transaction-table-container">
+        {% if transactions %}
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.description }}</td>
+                        <td>
+                            <span class="badge badge-{{ transaction.type }}">
+                                {{ transaction.type|capitalize }}
+                            </span>
+                        </td>
+                        <td class="{{ 'text-success' if transaction.type in ['deposit', 'transfer'] and 'Received' in transaction.description else 'text-danger' if transaction.type in ['withdraw', 'transfer'] else '' }}">
+                            {% if transaction.type in ['deposit', 'transfer'] and 'Received' in transaction.description %}
+                                +₹{{ transaction.amount }}
+                            {% elif transaction.type in ['withdraw', 'transfer'] %}
+                                -₹{{ transaction.amount }}
+                            {% else %}
+                                ₹{{ transaction.amount }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="no-transactions">
+                <i class="fas fa-receipt"></i>
+                <h3>No transactions found</h3>
+                <p>You haven't made any transactions yet.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="export-options">
+        <h3>Export Transactions</h3>
+        <div class="export-buttons">
+            <button class="btn btn-outline"><i class="fas fa-file-pdf"></i> Export as PDF</button>
+            <button class="btn btn-outline"><i class="fas fa-file-excel"></i> Export as Excel</button>
+            <button class="btn btn-outline"><i class="fas fa-file-csv"></i> Export as CSV</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.filters {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.filter-group {
+    margin-bottom: 0;
+}
+
+.transaction-table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.no-transactions {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.no-transactions i {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #dee2e6;
+}
+
+.no-transactions h3 {
+    margin-bottom: 10px;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-deposit {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.badge-withdraw {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.badge-transfer {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.text-success {
+    color: var(--success) !important;
+    font-weight: 600;
+}
+
+.text-danger {
+    color: var(--danger) !important;
+    font-weight: 600;
+}
+
+.export-options {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.export-options h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.export-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+</style>
+{% endblock %}
